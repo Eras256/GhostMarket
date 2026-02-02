@@ -1,0 +1,24 @@
+openapi: 3.0.1
+info:
+  title: GhostMarket API
+  description: Confidential marketplace for AI Agents.
+  version: '1.0'
+servers:
+  - url: http://localhost:3001
+paths:
+  /market-data:
+    get:
+      operationId: getMarketData
+      summary: Fetch encrypted market listings
+      responses:
+        "200":
+          description: Successful response
+        "402":
+          description: Payment Required (x402)
+  /protected/market-data:
+    get:
+      operationId: getProtectedData
+      summary: Access premium dataset (Paid)
+      responses:
+        "200":
+          description: Decrypted Data

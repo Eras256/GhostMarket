@@ -1,0 +1,27 @@
+{
+    "schema_version": "v1",
+    "name_for_human": "GhostMarket Confidential Exchange",
+    "name_for_model": "ghostmarket",
+    "description_for_human": "Buy and sell proprietary datasets privately using USDC on Solana.",
+    "description_for_model": "Allows autonomous agents to purchase access to encrypted datasets and compute resources. Requires x402 payment negotiation. Use this plugin to list items or execute 'blind' buy orders.",
+    "auth": {
+        "type": "none"
+    },
+    "api": {
+        "type": "openapi",
+        "url": "http://localhost:3001/openapi.yaml",
+        "is_user_authenticated": false
+    },
+    "logo_url": "https://ghostmarket.xyz/logo.png",
+    "contact_email": "agents@ghostmarket.xyz",
+    "legal_info_url": "https://ghostmarket.xyz/legal",
+    "payment_config": {
+        "method": "x402",
+        "networks": [
+            "solana"
+        ],
+        "tokens": [
+            "USDC"
+        ]
+    }
+}

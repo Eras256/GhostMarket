@@ -1,0 +1,401 @@
+{
+  "address": "5oCgPmgHbb5h1qv3tkyVSW21Zjw75NzYEb5XYjUiqGxa",
+  "metadata": {
+    "name": "ghost_market",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "GhostMarket Core Protocol"
+  },
+  "instructions": [
+    {
+      "name": "execute_ghost_sale",
+      "discriminator": [
+        123,
+        150,
+        125,
+        225,
+        201,
+        195,
+        75,
+        199
+      ],
+      "accounts": [
+        {
+          "name": "listing",
+          "writable": true
+        },
+        {
+          "name": "seller",
+          "writable": true,
+          "relations": [
+            "listing"
+          ]
+        },
+        {
+          "name": "buyer_recipient",
+          "docs": [
+            "In a privacy preserve sale, the buyer identity source is hidden,",
+            "but the destination is known (or checks out with proof)."
+          ],
+          "writable": true
+        },
+        {
+          "name": "privacy_cash_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "proof",
+          "type": "bytes"
+        },
+        {
+          "name": "root",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "nullifier_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize_market",
+      "discriminator": [
+        35,
+        35,
+        189,
+        193,
+        155,
+        48,
+        170,
+        203
+      ],
+      "accounts": [
+        {
+          "name": "market_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  97,
+                  114,
+                  107,
+                  101,
+                  116,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "treasury",
+          "type": "pubkey"
+        },
+        {
+          "name": "fee_basis_points",
+          "type": "u16"
+        }
+      ]
+    },
+    {
+      "name": "list_item",
+      "discriminator": [
+        174,
+        245,
+        22,
+        211,
+        228,
+        103,
+        121,
+        13
+      ],
+      "accounts": [
+        {
+          "name": "listing",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  105,
+                  115,
+                  116,
+                  105,
+                  110,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "seller"
+              },
+              {
+                "kind": "arg",
+                "path": "listing_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "seller",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "listing_id",
+          "type": "u64"
+        },
+        {
+          "name": "price",
+          "type": "u64"
+        },
+        {
+          "name": "is_private",
+          "type": "bool"
+        },
+        {
+          "name": "arcium_mxe_pubkey",
+          "type": {
+            "option": "pubkey"
+          }
+        },
+        {
+          "name": "x402_gateway_url",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "place_secret_bid",
+      "discriminator": [
+        2,
+        55,
+        174,
+        173,
+        193,
+        117,
+        114,
+        199
+      ],
+      "accounts": [
+        {
+          "name": "listing",
+          "writable": true
+        },
+        {
+          "name": "bidder",
+          "docs": [
+            "But usually yes, for fee payment."
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "arcium_mxe"
+        },
+        {
+          "name": "arcium_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "encrypted_amount",
+          "type": "bytes"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Listing",
+      "discriminator": [
+        218,
+        32,
+        50,
+        73,
+        43,
+        134,
+        26,
+        58
+      ]
+    },
+    {
+      "name": "MarketState",
+      "discriminator": [
+        0,
+        125,
+        123,
+        215,
+        95,
+        96,
+        164,
+        194
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "SecretBidPlaced",
+      "discriminator": [
+        185,
+        73,
+        249,
+        93,
+        225,
+        91,
+        202,
+        41
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NameTooLong",
+      "msg": "The provided name or URL is too long."
+    },
+    {
+      "code": 6001,
+      "name": "InvalidUrl",
+      "msg": "Invalid URL encoding."
+    }
+  ],
+  "types": [
+    {
+      "name": "Listing",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "seller",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "price",
+            "type": "u64"
+          },
+          {
+            "name": "is_private",
+            "type": "bool"
+          },
+          {
+            "name": "arcium_mxe_pubkey",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "x402_gateway_url",
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MarketState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury",
+            "type": "pubkey"
+          },
+          {
+            "name": "fee_basis_points",
+            "type": "u16"
+          },
+          {
+            "name": "total_volume",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SecretBidPlaced",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "listing",
+            "type": "pubkey"
+          },
+          {
+            "name": "bidder",
+            "type": "pubkey"
+          },
+          {
+            "name": "mxe",
+            "type": "pubkey"
+          },
+          {
+            "name": "encrypted_amount",
+            "type": "bytes"
+          }
+        ]
+      }
+    }
+  ]
+}

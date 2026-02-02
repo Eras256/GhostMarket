@@ -1,0 +1,22 @@
+# Node
+node_modules
+dist
+.next
+.turbo
+coverage
+
+# Rust / Anchor
+target
+**/*.rs.bk
+.anchor
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode
+.idea
+*.swp
+deploy-wallet.json
