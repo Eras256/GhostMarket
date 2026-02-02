@@ -70,10 +70,11 @@ graph LR
 
 ## 📍 Contract Addresses
 
-| Environment | Program Name | Address |
+| Environment | Status | URL |
 | :--- | :--- | :--- |
-| **Devnet** | `ghost_market` | `5oCgPmgHbb5h1qv3tkyVSW21Zjw75NzYEb5XYjUiqGxa` |
-| **Devnet** | `Arcium Stub` | `5oCgPmgHbb5h1qv3tkyVSW21Zjw75NzYEb5XYjUiqGxa` |
+| **Production** | 🟢 Live | [ghost-market-web.vercel.app](https://ghost-market-web.vercel.app) |
+| **Market API** | 🟢 Active | [ghost-market-api.vercel.app](https://ghost-market-api.vercel.app) |
+| **Solana** | ⛓️ Devnet | `5oCgPmgHbb5h1qv3tkyVSW21Zjw75NzYEb5XYjUiqGxa` |
 
 ---
 
